@@ -1,4 +1,4 @@
-const BASE = '';
+const BASE = "https://zorvyn-assignment-s6pn.onrender.com";
 
 function getToken() {
   return localStorage.getItem('token');

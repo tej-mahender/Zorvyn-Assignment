@@ -21,8 +21,11 @@ const app = express();
 // ─── Security & Logging ──────────────────────────────────────────────────────
 
 app.use(helmet());
-app.use(cors());
-app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+app.use(
+  cors({
+    origin: "*",
+  }),
+);app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
 // ─── Body Parsing ────────────────────────────────────────────────────────────
 
