@@ -2,10 +2,10 @@ const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'Finance Dashboard API',
-      version: '1.0.0',
+      title: "Finance Dashboard API",
+      version: "1.0.0",
       description: `
 ## Finance Dashboard Backend
 
@@ -33,88 +33,92 @@ Include it in the header: \`Authorization: Bearer <token>\`
 - **Analyst:** analyst@finance.dev / Analyst@123
 - **Viewer:** viewer@finance.dev / Viewer@123
       `,
-      contact: { name: 'Finance API Support' },
+      contact: { name: "Finance API Support" },
     },
     servers: [
-      { url: 'http://localhost:3000', description: 'Development server' },
+      {
+        url: "https://zorvyn-assignment-s6pn.onrender.com",
+        description: "Production server",
+      },
+      { url: "http://localhost:3000", description: "Development server" },
     ],
     components: {
       securitySchemes: {
         BearerAuth: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT',
-          description: 'Enter your JWT token',
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+          description: "Enter your JWT token",
         },
       },
       schemas: {
         Error: {
-          type: 'object',
+          type: "object",
           properties: {
-            success: { type: 'boolean', example: false },
-            message: { type: 'string' },
-            errors:  { type: 'array', items: { type: 'object' } },
+            success: { type: "boolean", example: false },
+            message: { type: "string" },
+            errors: { type: "array", items: { type: "object" } },
           },
         },
         Pagination: {
-          type: 'object',
+          type: "object",
           properties: {
-            page:      { type: 'integer' },
-            limit:     { type: 'integer' },
-            total:     { type: 'integer' },
-            totalPages:{ type: 'integer' },
-            hasNext:   { type: 'boolean' },
-            hasPrev:   { type: 'boolean' },
+            page: { type: "integer" },
+            limit: { type: "integer" },
+            total: { type: "integer" },
+            totalPages: { type: "integer" },
+            hasNext: { type: "boolean" },
+            hasPrev: { type: "boolean" },
           },
         },
         User: {
-          type: 'object',
+          type: "object",
           properties: {
-            id:         { type: 'string', format: 'uuid' },
-            name:       { type: 'string' },
-            email:      { type: 'string', format: 'email' },
-            role:       { type: 'string', enum: ['VIEWER','ANALYST','ADMIN'] },
-            status:     { type: 'string', enum: ['active','inactive'] },
-            created_at: { type: 'string', format: 'date-time' },
-            updated_at: { type: 'string', format: 'date-time' },
+            id: { type: "string", format: "uuid" },
+            name: { type: "string" },
+            email: { type: "string", format: "email" },
+            role: { type: "string", enum: ["VIEWER", "ANALYST", "ADMIN"] },
+            status: { type: "string", enum: ["active", "inactive"] },
+            created_at: { type: "string", format: "date-time" },
+            updated_at: { type: "string", format: "date-time" },
           },
         },
         FinancialRecord: {
-          type: 'object',
+          type: "object",
           properties: {
-            id:          { type: 'string', format: 'uuid' },
-            amount:      { type: 'number', example: 1500.00 },
-            type:        { type: 'string', enum: ['income','expense'] },
-            category:    { type: 'string', example: 'Salary' },
-            date:        { type: 'string', format: 'date', example: '2024-01-15' },
-            notes:       { type: 'string', example: 'Monthly salary' },
-            created_by:  {
-              type: 'object',
+            id: { type: "string", format: "uuid" },
+            amount: { type: "number", example: 1500.0 },
+            type: { type: "string", enum: ["income", "expense"] },
+            category: { type: "string", example: "Salary" },
+            date: { type: "string", format: "date", example: "2024-01-15" },
+            notes: { type: "string", example: "Monthly salary" },
+            created_by: {
+              type: "object",
               properties: {
-                id:   { type: 'string' },
-                name: { type: 'string' },
+                id: { type: "string" },
+                name: { type: "string" },
               },
             },
-            created_at:  { type: 'string', format: 'date-time' },
-            updated_at:  { type: 'string', format: 'date-time' },
+            created_at: { type: "string", format: "date-time" },
+            updated_at: { type: "string", format: "date-time" },
           },
         },
         AuditLog: {
-          type: 'object',
+          type: "object",
           properties: {
-            id:         { type: 'string', format: 'uuid' },
-            action:     { type: 'string' },
-            entity:     { type: 'string' },
-            entity_id:  { type: 'string' },
-            metadata:   { type: 'object' },
-            ip_address: { type: 'string' },
-            created_at: { type: 'string', format: 'date-time' },
+            id: { type: "string", format: "uuid" },
+            action: { type: "string" },
+            entity: { type: "string" },
+            entity_id: { type: "string" },
+            metadata: { type: "object" },
+            ip_address: { type: "string" },
+            created_at: { type: "string", format: "date-time" },
             user: {
-              type: 'object',
+              type: "object",
               properties: {
-                id:    { type: 'string' },
-                name:  { type: 'string' },
-                email: { type: 'string' },
+                id: { type: "string" },
+                name: { type: "string" },
+                email: { type: "string" },
               },
             },
           },
@@ -123,7 +127,7 @@ Include it in the header: \`Authorization: Bearer <token>\`
     },
     security: [{ BearerAuth: [] }],
   },
-  apis: ['./src/routes/*.js'],
+  apis: ["./src/routes/*.js"],
 };
 
 const swaggerSpec = swaggerJsdoc(options);
